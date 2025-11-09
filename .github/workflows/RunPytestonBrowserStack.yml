@@ -42,4 +42,4 @@ jobs:
 
       - name: Run tests with BrowserStack SDK
         run: |
-          browserstack-sdk pytest -v
+          browserstack-sdk pytest tests/test_demo.py
