@@ -1,0 +1,74 @@
+name: BrowserStack Pytest Run
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:        # Allows BrowserStack to trigger this job
+    inputs:
+      rerun_mode:
+        description: "Run mode (full or rerun)"
+        required: false
+        default: "full"
+
+jobs:
+  run-browserstack-tests:
+    runs-on: ubuntu-latest
+    name: Run Pytest Tests on BrowserStack
+
+    steps:
+      # --- Checkout source code ---
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # --- Set up Python environment ---
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          pip install -r requirements.txt
+          pip install pytest pytest-html
+
+      # --- Configure BrowserStack environment ---
+      - name: Setup BrowserStack environment
+        uses: browserstack/github-actions/setup-env@master
+        with:
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
+          build-name: "${{ github.workflow }} - Run #${{ github.run_number }}"
+          project-name: "Pytest Demo"
+
+      # --- (Optional) Start BrowserStack Local tunnel ---
+      - name: Start BrowserStack Local
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: start
+
+      # --- Run pytest tests ---
+      - name: Run pytest suite
+        env:
+          BROWSERSTACK_RERUN: ${{ github.event.inputs.rerun_mode == 'rerun' && 'true' || 'false' }}
+        run: |
+          echo "Rerun mode: $BROWSERSTACK_RERUN"
+          pytest tests/ \
+            --html=reports/report.html --self-contained-html \
+            -o log_cli=true -o log_cli_level=INFO
+
+      # --- Stop BrowserStack Local tunnel ---
+      - name: Stop BrowserStack Local
+        if: always()
+        uses: browserstack/github-actions/setup-local@master
+        with:
+          local-testing: stop
+
+      # --- Upload HTML report as artifact ---
+      - name: Upload Pytest report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-html-report
+          path: reports/report.html
