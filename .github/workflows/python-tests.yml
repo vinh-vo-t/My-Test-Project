@@ -33,7 +33,7 @@ jobs:
           username: $
           access-key: $
           build-name: BUILD_INFO
-          report-timeout: 2000 # This is an optional parameter
+          report-timeout: 600 # This is an optional parameter
           
       - name: Upload HTML Report as Artifact
         uses: actions/upload-artifact@v4
