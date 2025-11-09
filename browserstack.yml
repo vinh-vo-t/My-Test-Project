@@ -1,0 +1,9 @@
+userName: vinhvo_TY468L
+accessKey: uAsw425bpjbBxigKYvyL
+buildName: "Your static build/job name goes here"
+projectName: "Your static project name goes here"
+CUSTOM_TAG_1: "You can set a custom Build Tag here"
+# Use CUSTOM_TAG_<N> and set more build tags as you need.
+framework: pytest
+testObservability: true
+browserstackAutomation: false # Set to true for tests on BrowserStack products.
