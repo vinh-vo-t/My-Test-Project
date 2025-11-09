@@ -1,0 +1,13 @@
+{
+  "auth": {
+    "username": "YOUR_BROWSERSTACK_USERNAME",
+    "access_key": "YOUR_BROWSERSTACK_ACCESS_KEY"
+  },
+  "testObservability": {
+    "projectName": "My-Test-Project",
+    "buildName": "Pytest-GitHubActions-Build",
+    "buildTag": ["CI", "GitHubActions"],
+    "debug": true
+  },
+  "disableUsageReporting": false
+}
