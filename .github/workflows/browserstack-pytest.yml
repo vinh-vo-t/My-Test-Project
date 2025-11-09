@@ -8,7 +8,7 @@ on:
     inputs:
       rerun_mode:
         description: "Run mode (full or rerun)"
-        required: true
+        required: false
         default: "full"
 
 jobs:
