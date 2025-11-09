@@ -32,7 +32,7 @@ jobs:
               "access_key": "${{ secrets.BROWSERSTACK_ACCESS_KEY }}"
             },
             "testObservability": {
-              "projectName": "My-Test-Project",
+              "projectName": "My-Test-Project-1",
               "buildName": "Pytest-GitHubActions-Build",
               "buildTag": ["CI", "GitHubActions"],
               "debug": true
