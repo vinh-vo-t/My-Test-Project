@@ -68,13 +68,17 @@ jobs:
         with:
           local-testing: start
 
+      # --- Run pytest tests locally ---
+        run: |
+          browserstack-sdk pytest -v
+          
       # --- Run pytest tests ---
       - name: Run pytest suite
         env:
           BROWSERSTACK_RERUN: ${{ github.event.inputs.rerun_mode == 'rerun' && 'true' || 'false' }}
         run: |
           echo "Rerun mode: $BROWSERSTACK_RERUN"
-          browserstack-sdk pytest tests/ \
+          pytest tests/ \
             --html=reports/report.html --self-contained-html \
             -o log_cli=true -o log_cli_level=INFO
 
