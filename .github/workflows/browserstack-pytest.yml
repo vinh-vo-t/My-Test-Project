@@ -46,6 +46,7 @@ jobs:
           accessKey: uAsw425bpjbBxigKYvyL
           buildName: "PytestCI"
           projectName: "Test"
+          buildIdentifier: "${GITHUB_RUN_ID}"
           CUSTOM_TAG_1: "Regression"
           # Use CUSTOM_TAG_<N> and set more build tags as you need.
           framework: pytest
