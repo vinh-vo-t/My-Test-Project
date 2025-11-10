@@ -59,11 +59,11 @@ jobs:
             -o log_cli=true -o log_cli_level=INFO
 
       # --- Stop BrowserStack Local tunnel ---
-      - name: Stop BrowserStack Local
-        if: always()
-        uses: browserstack/github-actions/setup-local@master
-        with:
-          local-testing: stop
+      #- name: Stop BrowserStack Local
+      #  if: always()
+      #  uses: browserstack/github-actions/setup-local@master
+      #  with:
+      #    local-testing: stop
           
       # --- Browser Stack build report ---
       - name: 'BrowserStack Build Report'
@@ -72,7 +72,7 @@ jobs:
           username: ${{ secrets.BROWSERSTACK_USERNAME }}
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           build-name: BUILD_INFO
-          report-timeout: 600 # This is an optional parameter
+      #    report-timeout: 600 # This is an optional parameter
           
       # --- Upload HTML report as artifact ---
       - name: Upload Pytest report
