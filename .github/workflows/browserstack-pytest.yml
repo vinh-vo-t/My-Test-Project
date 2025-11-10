@@ -75,10 +75,10 @@ jobs:
           report-timeout: 600 # This is an optional parameter
           
       # --- Upload HTML report as artifact ---
-      - name: Upload HTML Report as Artifact
+      - name: Upload Pytest report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-            name: $
-            path: $
-        continue-on-error: true
+          name: pytest-html-report
+          path: reports/report.html
 
