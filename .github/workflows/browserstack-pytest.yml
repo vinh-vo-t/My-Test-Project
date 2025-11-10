@@ -32,6 +32,9 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           pip install -r requirements.txt
           pip install pytest pytest-html
+
+      - name: Set up browserstack-sdk
+        run: |
           browserstack-sdk setup --framework "pytest" --username "vinhvo_TY468L" --key "uAsw425bpjbBxigKYvyL"
           pip show browserstack-sdk
 
