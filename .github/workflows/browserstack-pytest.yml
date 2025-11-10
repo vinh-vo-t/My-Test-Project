@@ -69,8 +69,8 @@ jobs:
       - name: 'BrowserStack Build Report'
         uses: 'browserstack/github-actions/browserstack-report-action@master'
         with:
-          username: $
-          access-key: $
+          username: ${{ secrets.BROWSERSTACK_USERNAME }}
+          access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           build-name: BUILD_INFO
           report-timeout: 600 # This is an optional parameter
           
