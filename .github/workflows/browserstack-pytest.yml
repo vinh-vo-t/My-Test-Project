@@ -38,6 +38,21 @@ jobs:
           browserstack-sdk setup --framework "pytest" --username "vinhvo_TY468L" --key "uAsw425bpjbBxigKYvyL"
           pip show browserstack-sdk
 
+      # --- Update BrowserStack Config
+      - name: Replace browserstack.yml content
+        run: |
+          cat > browserstack.yml <<'EOF'
+          userName: vinhvo_TY468L
+          accessKey: uAsw425bpjbBxigKYvyL
+          buildName: "PytestCI"
+          projectName: "Test"
+          CUSTOM_TAG_1: "Regression"
+          # Use CUSTOM_TAG_<N> and set more build tags as you need.
+          framework: pytest
+          testObservability: true
+          browserstackAutomation: false # Set to true for tests on BrowserStack products.
+          EOF
+
       # --- Configure BrowserStack environment ---
       - name: Setup BrowserStack environment
         uses: browserstack/github-actions/setup-env@master
