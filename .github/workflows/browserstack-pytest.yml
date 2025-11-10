@@ -79,9 +79,10 @@ jobs:
           BROWSERSTACK_RERUN: ${{ github.event.inputs.rerun_mode == 'rerun' && 'true' || 'false' }}
         run: |
           echo "Rerun mode: $BROWSERSTACK_RERUN"
-          pytest tests/ \
-            --html=reports/report.html --self-contained-html \
-            -o log_cli=true -o log_cli_level=INFO
+          browserstack-sdk pytest tests/test_demo.py
+          #pytest tests/ \
+          #  --html=reports/report.html --self-contained-html \
+          #  -o log_cli=true -o log_cli_level=INFO
 
       # --- Stop BrowserStack Local tunnel ---
       #- name: Stop BrowserStack Local
