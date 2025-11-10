@@ -69,6 +69,7 @@ jobs:
           local-testing: start
 
       # --- Run pytest tests locally ---
+      - name: Run pytest tests locally
         run: |
           browserstack-sdk pytest -v
           
